@@ -13,7 +13,9 @@ interface UseProductsReturn {
   lastUpdated: string | null;
 }
 
-export function useProducts(refreshInterval = 30000): UseProductsReturn {
+const DEFAULT_REFRESH_INTERVAL = parseInt(process.env.NEXT_PUBLIC_REFRESH_INTERVAL || '30000', 10);
+
+export function useProducts(refreshInterval = DEFAULT_REFRESH_INTERVAL): UseProductsReturn {
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
